@@ -1,4 +1,4 @@
-📄 1. Project Title:Internet Usage Clustering Using KMeans Algorithm
+![Screenshot 2025-04-22 112944](https://github.com/user-attachments/assets/36af0013-6805-491b-8a0b-ee2ae633bc23)📄 1. Project Title:Internet Usage Clustering Using KMeans Algorithm
 
 Submitted by:ARYAN RAJ PANDEY B.Tech CSE (AI), KIET Institute of Technology
 
@@ -60,6 +60,9 @@ Cluster 1 – Medium users
 Cluster 2 – Heavy users
 
 Each user now has a cluster label assigned. The output was visualized using a scatter plot based on daily usage hours and sessions per day.
+
+![Screenshot 2025-04-22 112944](https://github.com/user-attachments/assets/442cbf45-8e4f-4e75-b4ce-d50a9a20e000)
+
 
 🙌 6. Credits
 
