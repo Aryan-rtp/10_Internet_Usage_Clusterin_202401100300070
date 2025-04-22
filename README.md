@@ -1,4 +1,4 @@
-![Screenshot 2025-04-22 112944](https://github.com/user-attachments/assets/36af0013-6805-491b-8a0b-ee2ae633bc23)📄 1. Project Title:Internet Usage Clustering Using KMeans Algorithm
+📄 1. Project Title:Internet Usage Clustering Using KMeans Algorithm
 
 Submitted by:ARYAN RAJ PANDEY B.Tech CSE (AI), KIET Institute of Technology
 
