@@ -1,73 +1,76 @@
-📄 1. Project Title:Internet Usage Clustering Using KMeans Algorithm
-
-Submitted by:ARYAN RAJ PANDEY B.Tech CSE (AI), KIET Institute of Technology
-
-Date:22 April 2025
+📄 1. Project Title: Predicting Online Learning Completion Using Machine Learning
+📌 Submitted by: Ashish Gupta
+B.Tech CSE (AI), KIET Institute of Technology
+📅 Date: 22 April 2025
 
 📘 2. Introduction
+In today's fast-paced digital education landscape, understanding learner behavior is crucial for improving course engagement and completion rates. This project aims to predict whether a student will complete an online course based on activity logs such as videos watched, assignments submitted, and forum interactions. By using machine learning classification models, institutions can identify students who may need additional support.
 
-In today's digital age, understanding internet usage patterns can help in categorizing users and personalizing experiences. This project focuses on grouping users based on their online activity data such as daily usage time, site categories visited, and number of sessions per day. By using clustering, we can identify different types of users such as light, medium, and heavy users without any prior labels.
 
 🧪 3. Methodology
-
-We used the KMeans Clustering algorithm for this unsupervised learning task. The steps followed in this project were:
-
-Data Collection: Collected data from a CSV file containing user internet usage.
-
-Preprocessing: Standardized the features to bring all values to the same scale.
-
-Clustering: Applied KMeans algorithm to group users into 3 clusters.
-
-Visualization: Used a scatter plot to visualize user clusters based on usage behavior.
+We utilized a classification approach for this supervised learning problem. The steps followed in this project were:
+- Data Collection: Retrieved learner activity logs from a CSV file.
+- Preprocessing: Converted categorical data into numerical format and handled missing values.
+- Model Selection: Used Random Forest classifier to predict course completion.
+- Evaluation: Measured model performance using accuracy, precision, recall, and confusion matrix visualization.
 
 💻 4. Code
-
 import pandas as pd
+import seaborn as sns
 import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score
 
 # Load dataset
-df = pd.read_csv("internet_usage.csv")
+df = pd.read_csv("online_learning.csv")
 
-# Standardize data
-scaler = StandardScaler()
-scaled_data = scaler.fit_transform(df)
+# Convert categorical labels ('yes', 'no') to numerical (1, 0)
+df["completed"] = df["completed"].map({"yes": 1, "no": 0})
 
-# Apply KMeans clustering
-kmeans = KMeans(n_clusters=3, random_state=42)
-df['cluster'] = kmeans.fit_predict(scaled_data)
+# Split data into features and target
+X = df.drop(columns=["completed"])
+y = df["completed"]
 
-# Plot the clusters
-plt.figure(figsize=(10, 6))
-plt.scatter(df['daily_usage_hours'], df['sessions_per_day'],
-            c=df['cluster'], cmap='viridis', s=100)
-plt.xlabel('Daily Usage Hours')
-plt.ylabel('Sessions Per Day')
-plt.title('User Clustering Based on Internet Usage')
-plt.grid(True)
-plt.colorbar(label='Cluster')
+# Train/Test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train model
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+
+# Predictions
+y_pred = model.predict(X_test)
+
+# Calculate metrics
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+
+# Display results
+print(f"Accuracy: {accuracy:.2f}")
+print(f"Precision: {precision:.2f}")
+print(f"Recall: {recall:.2f}")
+
+# Confusion matrix heatmap
+conf_matrix = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(6, 4))
+sns.heatmap(conf_matrix, annot=True, fmt="d", cmap="Blues", xticklabels=["Not Completed", "Completed"], yticklabels=["Not Completed", "Completed"])
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.title("Confusion Matrix Heatmap")
 plt.show()
 
+
 📊 5. Output
-
-The KMeans algorithm successfully grouped the users into three clusters:
-
-Cluster 0 – Light users
-
-Cluster 1 – Medium users
-
-Cluster 2 – Heavy users
-
-Each user now has a cluster label assigned. The output was visualized using a scatter plot based on daily usage hours and sessions per day.
-
-![Screenshot 2025-04-22 112944](https://github.com/user-attachments/assets/442cbf45-8e4f-4e75-b4ce-d50a9a20e000)
-
+The model successfully classified learners into two categories:
+- Completed: Students who finish the course.
+- Not Completed: Students who drop out.
+The output was visualized using a confusion matrix to assess classification performance.
 
 🙌 6. Credits
+📌 Project By: Ashish Gupta
+🛠 Tools Used: Python, Pandas, Scikit-learn, Matplotlib
+📂 Data Source: online_learning.csv
 
-Project By: ARYAN RAJ PANDEY
 
-Tools Used: Python, Pandas, Scikit-learn, Matplotlib
-
-Data Source: internet_usage.csv
